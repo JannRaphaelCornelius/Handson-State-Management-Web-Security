@@ -1,0 +1,29 @@
+Jawaban Eksperimen 1 Session Cookie vs Persistent Cookie
+
+sessionTest: [hilang/ada?]   _Hilang_
+persistentTest: [hilang/ada?]   _Ada_
+
+
+Jawaban Ekperimen 2 Path Restriction
+
+Halaman	             cookieRoot	 cookieAdmin
+/index.html              ada         -
+/admin/index.html		 ada        ada
+/admin/dashboard/index.html	ada	    ada
+
+
+Jawaban Eksperimen 3 Secure Flag
+
+Cookie Secure tersimpan di localhost HTTP? _Ya_ (Ya/Tidak)
+Mengapa bisa tersimpan? Browser modern (seperti Chrome, Firefox, dan Edge) menganggap localhost sebagai "Secure Origin" secara default.
+
+Pertanyaan Refleksi
+1. Session cookie sangat berguna karena menjaga sesi login tetap aktif selama browser terbuka dan meningkatkan keamanan dengan cara menghapus data autentikasi secara otomatis begitu browser ditutup.
+2. Saya akan menggunakan: Secure, HttpOnly, SameSite=Lax.
+Alasannya : Secure melindungi data transaksi di jalur HTTPS, HttpOnly mencegah pencurian session oleh hacker, dan SameSite=Lax mencegah serangan transfer ilegal (CSRF) sambil tetap menjaga kenyamanan user saat belanja.
+3. Risikonya adalah Session Hijacking melalui serangan XSS.
+Penjelasan : Tanpa HttpOnly, script jahat (JavaScript) bisa membaca cookie session kamu. Hacker cukup mencuri kode session tersebut untuk masuk ke akunmu tanpa perlu tahu password-mu.
+4. Max-Age : Gunakan untuk durasi relatif (contoh: "cookie ini mati dalam 1 jam"). Lebih akurat karena dihitung dalam detik dan tidak peduli jika jam di komputer user salah.
+Expires : Gunakan untuk waktu spesifik (contoh: "mati tanggal 31 Desember"). Biasanya dipakai untuk mendukung browser jadul (legacy).
+5. Cookie tersebut akan menjadi Shared Cookie (bisa diakses oleh semua sub-domain).
+Efeknya : Jika kamu login di example.com, kamu juga akan otomatis terdeteksi login di katalog.example.com, admin.example.com, dan sub-domain lainnya di bawah nama yang sama.
